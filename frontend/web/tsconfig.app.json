@@ -1,0 +1,42 @@
+{
+    "compilerOptions": {
+        "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+        "target": "es2023",
+        "lib": ["ES2023", "DOM"],
+        "module": "esnext",
+        "types": ["vite/client"],
+        "skipLibCheck": true,
+
+        /* Bundler mode */
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "verbatimModuleSyntax": true,
+        "moduleDetection": "force",
+        "noEmit": true,
+        "jsx": "react-jsx",
+
+        /* Linting */
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "experimentalDecorators": true,
+
+        /* Alias */
+        "baseUrl": "./",
+        "paths": {
+            "~material/*": ["src/material/*"],
+            "~components/*": ["src/components/*"],
+            "~layouts/*": ["src/layouts/*"],
+            "~pages/*": ["src/pages/*"],
+            "~routes/*": ["src/routes/*"],
+            "~services/*": ["src/services/*"],
+            "~stores/*": ["src/stores/*"],
+            "~styles/*": ["src/styles/*"],
+            "~utils/*": ["src/utils/*"],
+            "~ui/*": ["src/ui/*"],
+            "~apiHooks": ["src/apiHooks/index.ts"],
+            "~apiHooks/*": ["src/apiHooks/*"]
+        }
+    },
+    "include": ["src"]
+}

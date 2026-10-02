@@ -1,0 +1,80 @@
+@theme {
+    --color-*: initial;
+
+    --color-error-50: #feeded;
+    --color-error-100: #fedede;
+    --color-error-200: #fdbcbd;
+    --color-error-300: #fc9799;
+    --color-error-400: #fb6d71;
+    --color-error-500: #fb2c36;
+    --color-error-600: #cf121f;
+    --color-error-700: #9e0b15;
+    --color-error-800: #6f050c;
+    --color-error-900: #430204;
+    --color-error-950: #2c0102;
+
+    --color-warning-50: #fff8f1;
+    --color-warning-100: #ffeedb;
+    --color-warning-200: #ffddb1;
+    --color-warning-300: #ffd087;
+    --color-warning-400: #ffbf25;
+    --color-warning-500: #efb100;
+    --color-warning-600: #bd8b00;
+    --color-warning-700: #8d6700;
+    --color-warning-800: #5c4200;
+    --color-warning-900: #332300;
+    --color-warning-950: #211600;
+
+    --color-info-50: #ebf9ff;
+    --color-info-100: #d5f3ff;
+    --color-info-200: #a4e7ff;
+    --color-info-300: #48daff;
+    --color-info-400: #00caf0;
+    --color-info-500: #00b8db;
+    --color-info-600: #0090ac;
+    --color-info-700: #006a7f;
+    --color-info-800: #004958;
+    --color-info-900: #002831;
+    --color-info-950: #00191f;
+
+    --color-success-50: #e6f9f0;
+    --color-success-100: #b8f0d6;
+    --color-success-200: #85e6b8;
+    --color-success-300: #4dd699;
+    --color-success-400: #26c47a;
+    --color-success-500: #1aad66;
+    --color-success-600: #149155;
+    --color-success-700: #107544;
+    --color-success-800: #0c5934;
+    --color-success-900: #084224;
+    --color-success-950: #052d18;
+
+    --color-grey-50: #f0f1f3;
+    --color-grey-100: #e0e2e8;
+    --color-grey-200: #bfc4cf;
+    --color-grey-300: #a1a9b9;
+    --color-grey-400: #828c9f;
+    --color-grey-500: #6a7282;
+    --color-grey-600: #535a67;
+    --color-grey-700: #3f454f;
+    --color-grey-800: #2b2e36;
+    --color-grey-900: #191c21;
+    --color-grey-950: #0f1115;
+
+    --color-common-black: #000;
+    --color-common-white: #fff;
+
+    --breakpoint-xs: 0px;
+    --breakpoint-sm: 480px;
+    --breakpoint-md: 720px;
+    --breakpoint-lg: 960px;
+    --breakpoint-xl: 1280px;
+}
+
+@utility direction-rtl {
+    direction: rtl;
+}
+
+@utility direction-ltr {
+    direction: ltr;
+}

@@ -1,0 +1,7 @@
+# Auto-detect text files and perform LF normalization
+* text=auto
+
+# Explicitly declare this file as LF-only
+src/modules/shared/i18n/i18n.generated.ts text eol=lf
+src/modules/shared/database/seeders/* text eol=lf
+src/modules/shared/database/migrations/* text eol=lf
