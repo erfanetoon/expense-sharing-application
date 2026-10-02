@@ -10,7 +10,6 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml turbo.json ./
 COPY backend/core/package.json backend/core/package.json
 COPY frontend/web/package.json frontend/web/package.json
-COPY packages/translation/package.json packages/translation/package.json
 
 RUN pnpm install --frozen-lockfile
 

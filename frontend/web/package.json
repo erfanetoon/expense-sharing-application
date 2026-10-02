@@ -16,7 +16,6 @@
         "@mui/material": "^9.2.0",
         "@mui/stylis-plugin-rtl": "^9.1.1",
         "@mui/x-date-pickers": "^9.12.0",
-        "@packages/translation": "workspace:*",
         "@tailwindcss/vite": "^4.3.1",
         "@tanstack/react-query": "^5.101.2",
         "axios": "^1.18.1",

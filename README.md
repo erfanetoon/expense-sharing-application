@@ -11,9 +11,7 @@ An expense is one directional payment. If Alice paid and the expense is for Bob,
 ```
 expense-sharing-application/
 ├── backend/core/          # NestJS API, SQLite entities, migrations, and Zod contracts
-├── frontend/web/          # Vite + React page, UI, and API hooks
-├── packages/
-│   └── translation/       # Shared copy
+├── frontend/web/          # Vite + React page, UI, API hooks, and copy
 └── package.json           # pnpm + Turborepo
 ```
 

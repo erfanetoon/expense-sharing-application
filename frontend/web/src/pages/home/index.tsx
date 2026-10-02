@@ -1,4 +1,4 @@
-import { copy } from "@packages/translation/messages";
+import { copy } from "../../translation/messages";
 import { useState } from "react";
 import { TbPlus, TbReceipt, TbScale } from "react-icons/tb";
 import {
