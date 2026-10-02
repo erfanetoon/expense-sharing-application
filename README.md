@@ -91,14 +91,84 @@ pnpm migrate             # apply migrations and seed
 pnpm lint                # biome check
 ```
 
-## Deployment
+## Production
 
-The production image serves the built web app and the API from one process, and keeps the SQLite file on a volume.
+Node.js 22 and pnpm 9 are required. Nginx serves the built page from `frontend/web/dist`. PM2 runs the API, and Nginx proxies `/v1` and `/swagger` to that process.
+
+From the repository root on the server (`/var/www/expense.erfanetoon.ir`):
 
 ```bash
-docker compose up --build
+corepack enable
+corepack prepare pnpm@9.0.0 --activate
+pnpm install
+
+cp backend/core/.env.sample backend/core/.env
+printf 'VITE_PORT=4001\nVITE_API_BASE_URL=\n' > frontend/web/.env
 ```
 
-The app listens on port 4000. Set `APP_ALLOWED_HOSTS` if the browser is on another origin.
+`VITE_API_BASE_URL` must be empty before the frontend build. The browser then calls the same domain, and Nginx forwards those calls to the API.
 
-A public URL depends on where you host this image (a VPS, Fly.io, Render, Railway, or similar). This repository does not include a live deployment.
+In `backend/core/.env`:
+
+```bash
+APP_ENV=production
+APP_PORT=4000
+APP_BASE_URL=http://expense.erfanetoon.ir
+APP_ALLOWED_HOSTS=http://expense.erfanetoon.ir
+APP_NAME=Expense Sharing
+LOG_LEVEL=info
+DB_FILE=./data/expense-sharing.sqlite
+MIGRATIONS_PATH=./src/database/migrations
+DB_DEBUG=false
+```
+
+Build both apps, create the database, and start the API with PM2 from `backend/core` so the SQLite path resolves there:
+
+```bash
+pnpm --filter @frontend/web build
+pnpm --filter @backend/core build
+pnpm migrate
+
+cd backend/core
+pm2 start dist/main.js --name expense-sharing
+pm2 save
+```
+
+Nginx site `/etc/nginx/sites-available/expense.erfanetoon.ir`:
+
+```nginx
+server {
+    listen 80;
+    server_name expense.erfanetoon.ir;
+
+    root /var/www/expense.erfanetoon.ir/frontend/web/dist;
+    index index.html;
+
+    location /v1/ {
+        proxy_pass http://127.0.0.1:4000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /swagger {
+        proxy_pass http://127.0.0.1:4000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+```
+
+Enable it and reload:
+
+```bash
+sudo ln -sfn /etc/nginx/sites-available/expense.erfanetoon.ir /etc/nginx/sites-enabled/expense.erfanetoon.ir
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+`http://expense.erfanetoon.ir` is the page. `http://expense.erfanetoon.ir/v1/...` is the API. `http://expense.erfanetoon.ir/swagger` is the API docs.

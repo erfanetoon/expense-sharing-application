@@ -1,6 +1,0 @@
-node_modules
-**/dist
-**/.env
-packages/database/data/*.sqlite
-packages/database/data/*.sqlite-*
-.turbo
